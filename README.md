@@ -13,23 +13,23 @@
     │  │  └─com
     │  │      └─yll
     │  │          └─event
-    │  │              ├─anno      注解
-    │  │              ├─config    配置
-    │  │              ├─controller 
-    │  │              ├─entity
-    │  │              ├─enums
+    │  │              ├─anno      注解（包含枚举验证，自动分页）
+    │  │              ├─config    配置（包含自动更新数据库字段，redis序列化器配置，swagger配置）
+    │  │              ├─controller 业务（包含文件上传）
+    │  │              ├─entity 数据库对象
+    │  │              ├─enums 状态枚举
     │  │              ├─exception 全局异常处理
-    │  │              ├─interceptor  拦截器
-    │  │              ├─mapper
+    │  │              ├─interceptor  登录拦截器
+    │  │              ├─mapper dao层
     │  │              ├─pagehelper  物理分页插件
     │  │              ├─service
     │  │              │  └─impl
-    │  │              ├─util
-    │  │              ├─validation  自定义验证器
+    │  │              ├─util 工具类（包含阿里存储对象，Token生成）
+    │  │              ├─validation  自定义枚举验证器
     │  │              └─vo
-    │  │                  ├─req
-    │  │                  └─resp
-    │  └─resources
+    │  │                  ├─req  请求VO（如果使用分组验证器就不用区分这么多，其实复制粘贴也很快）
+    │  │                  └─resp 返回VO
+    │  └─resources   资源配置
     │      ├─static
     │      └─templates
     └─test
