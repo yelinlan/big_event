@@ -48,4 +48,19 @@ public class Result<T> {
     public static Result error(String message) {
         return new Result(1, message, null);
     }
+
+	public Result setCode(Integer code) {
+		this.code = code;
+		return this;
+	}
+
+	public Result setMessage(String message) {
+		this.message = message;
+		return this;
+	}
+
+	public Result setData(T data) {
+		this.data = data;
+		return this;
+	}
 }

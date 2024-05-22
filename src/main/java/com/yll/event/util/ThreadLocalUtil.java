@@ -27,6 +27,9 @@ public class ThreadLocalUtil {
 	 */
 	public static Integer userId() {
 		Map<String, Object> map = get();
+		if (map==null){
+			return null;
+		}
 		NumberWithFormat number = (NumberWithFormat) map.get("id");
 		return number.intValue();
 	}

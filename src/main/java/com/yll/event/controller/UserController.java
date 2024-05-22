@@ -47,7 +47,7 @@ public class UserController {
 		User user = userService.getUserByName(loginUserReq.getUsername());
 		if (user == null) {
 			userService.register(loginUserReq.getUsername(), loginUserReq.getPassword());
-			return Result.success();
+			return Result.success().setMessage("注册成功");
 		} else {
 			return Result.error("用户名太受欢迎，请换一个用户名称！");
 		}
@@ -64,7 +64,7 @@ public class UserController {
 			claims.put("username", user.getUsername());
 			String token = Token.gen(claims);
 			commonCache.setToken(token);
-			return Result.success(token);
+			return Result.success(token).setMessage("登录成功");
 		}
 		return Result.error("用户名或密码错误！");
 	}
