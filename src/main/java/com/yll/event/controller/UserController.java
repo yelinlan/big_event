@@ -19,7 +19,6 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +54,7 @@ public class UserController {
 
 	@Operation(summary = "该接口用于登录", description = "该接口用于登录")
 	@PostMapping("/login")
-	public Result login(@Valid LoginUserReq loginUserReq) {
+	public Result login(@Validated LoginUserReq loginUserReq) {
 		User user = userService.getUserByName(loginUserReq.getUsername());
 		String md5 = SecureUtil.md5(loginUserReq.getPassword());
 		if (user != null && user.getPassword().equals(md5)) {
@@ -107,8 +106,9 @@ public class UserController {
 
 	@Operation(summary = "该接口用于更新已登录用户的密码", description = "该接口用于更新已登录用户的密码")
 	@PatchMapping("/updatePwd")
-	public Result<UserRsp> updatePwd(@Validated @RequestBody PwdRequestReq pwdRequestReq,@RequestHeader("Authorization") String token) {
-		if (!pwdRequestReq.getNewPwd().equals(pwdRequestReq.getRePwd())){
+	public Result<UserRsp> updatePwd(@Validated @RequestBody PwdRequestReq pwdRequestReq,
+			@RequestHeader("Authorization") String token) {
+		if (!pwdRequestReq.getNewPwd().equals(pwdRequestReq.getRePwd())) {
 			return Result.error("两次填写的密码不一致");
 		}
 		User userByName = userService.getUserByName(ThreadLocalUtil.username());
@@ -119,18 +119,20 @@ public class UserController {
 		user.setId(ThreadLocalUtil.userId());
 		user.setPassword(SecureUtil.md5(pwdRequestReq.getNewPwd()));
 		userService.updateById(user);
-		commonCache.deleteToken(token);
+		clearUserInfoCache(token);
 		return Result.success(null);
 	}
 
 	@Operation(summary = "该接口用于退出登录", description = "该接口用于退出登录")
 	@GetMapping("/logout")
 	public Result<UserRsp> logout(@RequestHeader("Authorization") String token) {
-		ThreadLocalUtil.remove();
-		commonCache.deleteToken(token);
+		clearUserInfoCache(token);
 		return Result.success(null);
 	}
 
-
+	private void clearUserInfoCache(String token) {
+		commonCache.deleteToken(token);
+		ThreadLocalUtil.remove();
+	}
 
 }

@@ -12,7 +12,7 @@ public class LoginUserReq {
 
 	@Schema(description = "用户名",required = true)
 	@Pattern(regexp = "^\\S{5,16}$", message = "5~16位非空字符")
-	@NotBlank()
+	@NotBlank
 	private final String username;
 
 
