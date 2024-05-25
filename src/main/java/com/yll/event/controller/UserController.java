@@ -123,4 +123,14 @@ public class UserController {
 		return Result.success(null);
 	}
 
+	@Operation(summary = "该接口用于退出登录", description = "该接口用于退出登录")
+	@GetMapping("/logout")
+	public Result<UserRsp> logout(@RequestHeader("Authorization") String token) {
+		ThreadLocalUtil.remove();
+		commonCache.deleteToken(token);
+		return Result.success(null);
+	}
+
+
+
 }

@@ -36,8 +36,8 @@ public class AutoPageAspectj {
 	@Around("@annotation(myAutoPage)")
 	public Object test(ProceedingJoinPoint point, AutoPage myAutoPage) throws Throwable {
 		//开始分页
-		Integer page = Convert.toInt(req.getParameter("page"), myAutoPage.page());
-		Integer size = Convert.toInt(req.getParameter("size"), myAutoPage.size());
+		Integer page = Convert.toInt(req.getParameter("pageNum"), myAutoPage.page());
+		Integer size = Convert.toInt(req.getParameter("pageSize"), myAutoPage.size());
 		PageHelper.startPage(page, size);
 		Object[] args = point.getArgs();
 		Object result = point.proceed(args);

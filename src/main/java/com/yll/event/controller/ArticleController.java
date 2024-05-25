@@ -88,7 +88,7 @@ public class ArticleController {
 	@AutoPage
 	public Result list(@Validated ArticleSearchCondition sc) {
 		LambdaQueryWrapper<Article> query = Wrappers.lambdaQuery(Article.class);
-		query.eq(Article::getCategoryId, sc.getCategoryId());
+		query.eq(sc.getCategoryId()!=null,Article::getCategoryId, sc.getCategoryId());
 		query.eq(StrUtil.isNotBlank(sc.getState()),Article::getState, sc.getState());
 		return Result.success(articleService.list(query));
 	}
