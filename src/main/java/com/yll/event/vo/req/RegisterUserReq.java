@@ -6,9 +6,12 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+/**
+ * @author 夜林蓝
+ */
 @Data
 @Schema(description = "创建请求对象")
-public class LoginUserReq {
+public class RegisterUserReq {
 
 	@Schema(description = "用户名",required = true)
 	@Pattern(regexp = "^\\S{5,16}$", message = "5~16位非空字符")
@@ -17,11 +20,8 @@ public class LoginUserReq {
 
 
 	@Schema(description = "密码",required = true)
+	@Pattern(regexp = "^\\S{5,16}$", message = "5~16位非空字符")
 	@NotBlank
 	private final String password;
 
-	@Schema(description = "验证码",required = true)
-	@Pattern(regexp = "^\\S{5,16}$", message = "5~16位非空字符")
-	@NotBlank
-	private final String code;
 }
