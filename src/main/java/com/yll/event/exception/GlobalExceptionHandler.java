@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public Result handleException(Exception e) {
 		log.error(e.getMessage(), e);
-		return Result.error(Objects.toString(e.getMessage(), "操作失败"));
+		return Result.error("服务异常");
 	}
 
 }

@@ -1,0 +1,17 @@
+package com.yll.event.util;
+
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
+
+public class RsaUtil {
+
+	public static final String PRIVATE_KEY = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJRPtCQoCTU0cYTRLl5keKviS8KMYGKVdAramcCbO5FeLgHK3hCfWPTMUalQevWoff9VIowOTvtLH79Q+WxzN6XNP6g2aYV5j8Ztk5siZrlxpBGfMwxcKy+GHJPZ+dv14wDohl77LtlFFFqSG70FA6saF1encjR5mCEwnsV7VETxAgMBAAECgYAdBMdTd73tehhoC2HOOExgHUQDieHmCCYPZZxF0lnCZLINybrPd844/61Oup+EZ3ZXujmrO7V6d8V7coWLEbQmYOXlpDs5M4Ph1c+6g12GxjlZx1SmUR2mc3NgNklXrUzmuCLk9rCyhzXaZSVHITwuPlsL59cXzdh4JMT/EF8TEQJBAN7GETqpgtnKnjvbxxkWxay2a+p0OYnFkZ/kHdGjUqETx/LBHsbuB/CzOkLQxO7QA0Us6j+fWwTB0qbrMUPXgM0CQQCqboTVXJmobtM7piIxrdIdXezsqAgSJJ9Ldkv0dnCaVT3FSQ1Ny0jWMtE7Wu9VCutR2G85fKbEybrHU/RBvwS1AkEAhGAP1trpXT9QPWOAcIEen12azKuZkStsOCWWLn8tV3fopXBqOG0zHK1znkZt7zZ96vogjAPGUxJVeUhicty4tQJAf9JjzaGlnK2BvzraamfzLhNDnjpn0zOkRPR0AuTRju5fZZdkYvQTrJJwWhPZa+7Ejp3EzVivuueRLe3JQ4YAAQJBAI4KnlH2SbbBVYHsFcx33T1JH4BaiQNJmBVeCr+7zjWoQEPmpjmLZGgPeiK5bPvMbuzfF+SDWcBdfvTImM1/Wzc=";
+
+	public static String decryptPrivate(String privateKey, String content) {
+		return SecureUtil.rsa(privateKey, null).decryptStr(content, KeyType.PrivateKey);
+	}
+
+	public static String decryptPrivate(String content) {
+		return SecureUtil.rsa(PRIVATE_KEY, null).decryptStr(content, KeyType.PrivateKey);
+	}
+}

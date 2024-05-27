@@ -10,18 +10,21 @@ import javax.validation.constraints.Pattern;
 @Schema(description = "创建请求对象")
 public class LoginUserReq {
 
-	@Schema(description = "用户名",required = true)
-	@Pattern(regexp = "^\\S{5,16}$", message = "5~16位非空字符")
+	@Schema(description = "用户名", required = true)
 	@NotBlank
 	private final String username;
 
 
-	@Schema(description = "密码",required = true)
+	@Schema(description = "密码", required = true)
 	@NotBlank
 	private final String password;
 
-	@Schema(description = "验证码",required = true)
+	@Schema(description = "验证码", required = true)
 	@Pattern(regexp = "^\\S{5,16}$", message = "5~16位非空字符")
 	@NotBlank
 	private final String code;
+
+	@Schema(description = "验证码", required = true)
+	private final String randKey;
+
 }
