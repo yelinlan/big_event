@@ -23,7 +23,9 @@ public class AutoFillHandler implements MetaObjectHandler {
 		//设置属性值
 		this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
 		this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
-		this.setFieldValByName("createUser", ThreadLocalUtil.userId(), metaObject);
+		if (ThreadLocalUtil.userId()!=null){
+			this.setFieldValByName("createUser", ThreadLocalUtil.userId(), metaObject);
+		}
 	}
 
 	/**

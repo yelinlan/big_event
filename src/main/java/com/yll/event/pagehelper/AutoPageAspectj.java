@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import java.util.List;
 @Slf4j
 @Aspect
 @Component
+@Order(2)
 public class AutoPageAspectj {
 
 	@Autowired
@@ -34,13 +36,12 @@ public class AutoPageAspectj {
 	}
 
 	@Around("@annotation(myAutoPage)")
-	public Object test(ProceedingJoinPoint point, AutoPage myAutoPage) throws Throwable {
+	public Object myPage(ProceedingJoinPoint point, AutoPage myAutoPage) throws Throwable {
 		//开始分页
 		Integer page = Convert.toInt(req.getParameter("pageNum"), myAutoPage.page());
 		Integer size = Convert.toInt(req.getParameter("pageSize"), myAutoPage.size());
 		PageHelper.startPage(page, size);
-		Object[] args = point.getArgs();
-		Object result = point.proceed(args);
+		Object result = point.proceed(point.getArgs());
 		return pageResult(result);
 	}
 

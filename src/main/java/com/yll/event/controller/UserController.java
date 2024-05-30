@@ -189,7 +189,7 @@ public class UserController {
 		int height = 30;
 		CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(width, height, 5, 0);
 		String code = captcha.getCode();
-		redisTemplate.opsForValue().set(PREFIX_CAPTCHA + randKey, code, 30, TimeUnit.SECONDS);
+		redisTemplate.opsForValue().set(PREFIX_CAPTCHA + randKey, code, 120, TimeUnit.SECONDS);
 		return Result.success(captcha.getImageBase64Data());
 	}
 
